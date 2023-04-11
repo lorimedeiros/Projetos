@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.Scanner;
+
 class Main {
 
     public static void main(String[] args) {
@@ -61,6 +64,7 @@ class Main {
             }
             if (pontuacao <= 0){
                 System.out.println("Você perdeu o jogo");
+                System.out.println("O número era " + num);
                 parada2 = true;
             }
         }
