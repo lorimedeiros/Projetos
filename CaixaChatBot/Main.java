@@ -30,6 +30,8 @@ Fique neste loop até que o usuário deseje sair do programa. Antes de terminar 
 
 import banco.entidades.Agencia;
 import banco.entidades.ContaSimples;
+import banco.entidades.util.RecebeDados;
+
 import java.util.Scanner;
 import static banco.entidades.Agencia.localizarConta;
 
@@ -100,7 +102,6 @@ public class Main {
                     }
 
 
-
                     System.out.println();
                     System.out.println("1. Depositar");
                     System.out.println("2. Sacar");
@@ -117,19 +118,17 @@ public class Main {
 
                     if (respMenu2 == 1){
 
-                        //CUIDADO COM DEPOSITO NEGATIVO, adcionar mensagem afirmativa
-                        
-                        System.out.printf("Informe a quantia que deseja depositar: ");
-                        double dep = Double.parseDouble(sc.nextLine());
+                        System.out.println();
+                        double dep = RecebeDados.recebeValorMaiorQueZero("Informe a quantia que deseja depositar: ");
                         cs.depositar(dep);
+                        System.out.println("Deposito realizado");
 
                     } else if (respMenu2 == 2){
 
-                        System.out.printf("Informe a quantia que deseja sacar: ");
-                        double sac = Double.parseDouble(sc.nextLine());
+                        System.out.println();
+                        double sac = RecebeDados.recebeValorMaiorQueZero("Informe a quantia que deseja sacar: ");
                         cs.sacar(sac);
-                        
-                        //consertar o sacar para dar mensagem de "saldo insuficiente" ou "deu bom" E NÃO PERMITIR SAQUE NEGATIVO
+                        System.out.println("Saque realizado");
 
                     } else if (respMenu2 == 3){
 
