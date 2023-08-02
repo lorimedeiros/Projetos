@@ -47,6 +47,8 @@ public class Main {
 
         do {
 
+            //parada1
+
             System.out.println();
             System.out.println("1. Criar uma nova conta");
             System.out.println("2. Localizar uma conta já existente através de seu número");
@@ -55,6 +57,7 @@ public class Main {
             if ((respMenu1 != 1) && (respMenu1 != 2)){
                 System.out.println("Opção inválida, tente novamente");
             }
+
 
             if (respMenu1 == 1){
 
@@ -72,7 +75,11 @@ public class Main {
 
                 do {
 
-                    do {
+                    //parada2
+
+                    while(!parada3) {
+
+                        //parada3
 
                         System.out.printf("Informe o número da conta: ");
                         long contaLocalizar = Long.parseLong(sc.nextLine());
@@ -86,14 +93,14 @@ public class Main {
                         } else {
 
                             System.out.println(Agencia.localizarConta(contaLocalizar).toString());
-                            parada2 = true;
+                            parada3 = true;
 
                         }
 
-                    } while(!parada2);
+                    }
 
-                    
-                    
+
+
                     System.out.println();
                     System.out.println("1. Depositar");
                     System.out.println("2. Sacar");
@@ -107,9 +114,11 @@ public class Main {
                         System.out.println("Opção inválida, tente novamente");
                     }
 
-                    // fazer ifs do menu
+
                     if (respMenu2 == 1){
 
+                        //CUIDADO COM DEPOSITO NEGATIVO, adcionar mensagem afirmativa
+                        
                         System.out.printf("Informe a quantia que deseja depositar: ");
                         double dep = Double.parseDouble(sc.nextLine());
                         cs.depositar(dep);
@@ -119,6 +128,8 @@ public class Main {
                         System.out.printf("Informe a quantia que deseja sacar: ");
                         double sac = Double.parseDouble(sc.nextLine());
                         cs.sacar(sac);
+                        
+                        //consertar o sacar para dar mensagem de "saldo insuficiente" ou "deu bom" E NÃO PERMITIR SAQUE NEGATIVO
 
                     } else if (respMenu2 == 3){
 
@@ -130,6 +141,7 @@ public class Main {
                         } else {
 
                             System.out.println(cs.getMovimento());
+                            //consertar, ta retornando endereço de obj
 
                         }
 
@@ -148,7 +160,11 @@ public class Main {
                             System.out.printf("Informe o valor que deseja transferir: ");
                             double valorTransf = Double.parseDouble(sc.nextLine());
 
+                            //botar mensagem de erro caso saldo indisponivel
+
                             cs.transferir(localizarConta(numDest), valorTransf);
+
+                            //so mandar isso caso tenha saldo
                             System.out.println("Transferencia realizada");
 
                         }
@@ -162,11 +178,11 @@ public class Main {
 
                         System.out.printf("Saldo da conta: ");
                         System.out.println(cs.getSaldo());
-                        parada3 = true;
+                        parada2 = true;
 
                     }
 
-                } while(!parada3);
+                } while(!parada2);
 
                 parada1 = true;
             }
