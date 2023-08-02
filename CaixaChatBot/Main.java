@@ -160,6 +160,8 @@ public class Main {
 
                     } else if (respMenu2 == 6){
 
+                        System.out.printf("Saldo da conta: ");
+                        System.out.println(cs.getSaldo());
                         parada3 = true;
 
                     }
