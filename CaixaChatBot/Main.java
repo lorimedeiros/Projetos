@@ -217,8 +217,6 @@ public class Main {
 
                         } else {
 
-                            System.out.println("Conta localizada");
-
                             double valorTransf = RecebeDados.recebeValorMaiorQueZero("Informe o valor que deseja transferir: ");
 
                             if (valorTransf > cs.getSaldo()){
