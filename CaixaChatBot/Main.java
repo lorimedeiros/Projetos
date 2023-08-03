@@ -28,23 +28,56 @@ Realize o desejo do usuário e em seguida, se a opção não é a de sair, apres
 Fique neste loop até que o usuário deseje sair do programa. Antes de terminar o programa imprima o saldo final da conta.
 */
 
-import banco.entidades.Agencia;
-import banco.entidades.ContaSimples;
-import banco.entidades.util.RecebeDados;
+//lembrar de importar o jar do banco se quiser rodar
 
+/*
+Escreva um programa chamado CaixaChatBot.
+
+Este chatbot deve ter as seguintes opções de uso:
+
+1. para criar uma nova conta
+
+2. para localizar uma conta já existente através de seu número
+
+Com a conta identificada o menu de opções do bot deve mudar o menu para as seguintes opções:
+
+    1. Depositar
+
+    2. Sacar
+
+    3. Extrato
+
+    4. Transferir
+
+    5. Saldo
+
+    6. Sair
+
+Realize o desejo do usuário e em seguida, se a opção não é a de sair, apresente o menu novamente. Para cada opção é preciso solicitar do usuário os dados necessários para a operação.  Se o usuário quer sacar, pergunte quanto e saque... Se quer transferir pergunte para que conta (número) e o valor...
+
+Fique neste loop até que o usuário deseje sair do programa. Antes de terminar o programa imprima o saldo final da conta.
+*/
+
+import banco.entidades.Agencia;
+import banco.entidades.Conta;
+import banco.entidades.ContaSimples;
+import banco.entidades.util.Data;
+import banco.entidades.util.RecebeDados;
 import java.util.Scanner;
-import static banco.entidades.Agencia.localizarConta;
+
+import static banco.entidades.Agencia.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        ContaSimples cs = null;
+        Conta cs = null;
         Scanner sc = new Scanner(System.in);
 
         boolean parada1 = false;
         boolean parada2 = false;
         boolean parada3 = false;
         int respMenu1, respMenu2;
+
 
 
         do {
@@ -94,12 +127,14 @@ public class Main {
 
                         } else {
 
+                            cs = localizarConta(contaLocalizar);
                             System.out.println(Agencia.localizarConta(contaLocalizar).toString());
                             parada3 = true;
 
                         }
 
                     }
+
 
 
                     System.out.println();
@@ -127,44 +162,75 @@ public class Main {
 
                         System.out.println();
                         double sac = RecebeDados.recebeValorMaiorQueZero("Informe a quantia que deseja sacar: ");
-                        cs.sacar(sac);
-                        System.out.println("Saque realizado");
+
+                        if (sac > cs.getSaldo()){
+
+                            System.out.println("Saldo insuficiente");
+
+                        } else {
+
+                            cs.sacar(sac);
+                            System.out.println("Saque realizado");
+
+                        }
 
                     } else if (respMenu2 == 3){
 
-                        if (cs.getMovimento() == null){
+
+                        if (cs.getTransações() == null){
 
                             System.out.println();
                             System.out.println("Extrato indisponível");
 
                         } else {
 
-                            System.out.println(cs.getMovimento());
-                            //consertar, ta retornando endereço de obj
+                            System.out.println();
+                            Data d0 = new Data();
+                            int dia = d0.getDia();
+                            int mes = d0.getMes();
+                            int ano = d0.getAno();
+                            int hora = d0.getHoras();
+                            int min = d0.getMinutos();
+                            int seg = d0.getSegundos();
+                            Data d = new Data(dia,mes, ano, hora, min, seg);
+                            System.out.println(cs.criarExtrato((cs.getDataAbertura()), d).formatar());
 
                         }
 
 
                     } else if (respMenu2 == 4){
 
-                        System.out.printf("Informe o número da conta do destinatário: ");
-                        long numDest = Long.parseLong(sc.nextLine());
+                        System.out.println();
+                        System.out.printf("Informe o número da conta destinatária: ");
+                        Long dest = Long.parseLong(sc.nextLine());
 
-                        if (localizarConta(numDest) == null) {
+                        System.out.println("Destinatário informado: ");
+                        System.out.println(localizarConta(dest).toString());
 
-                            System.out.println("Conta não localizada");
+                        if ((dest == cs.getNúmero())){
+
+                            System.out.println("Remetente e destinatário iguais");
+
+                        } else if (localizarConta(dest) == null) {
+
+                            System.out.println("Conta não encontrada");
 
                         } else {
 
-                            System.out.printf("Informe o valor que deseja transferir: ");
-                            double valorTransf = Double.parseDouble(sc.nextLine());
+                            System.out.println("Conta localizada");
 
-                            //botar mensagem de erro caso saldo indisponivel
+                            double valorTransf = RecebeDados.recebeValorMaiorQueZero("Informe o valor que deseja transferir: ");
 
-                            cs.transferir(localizarConta(numDest), valorTransf);
+                            if (valorTransf > cs.getSaldo()){
 
-                            //so mandar isso caso tenha saldo
-                            System.out.println("Transferencia realizada");
+                                System.out.println("Saldo insuficiente");
+
+                            } else {
+
+                                cs.transferir(localizarConta(dest), valorTransf);
+                                System.out.println("Transferencia realizada");
+
+                            }
 
                         }
 
