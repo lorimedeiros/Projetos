@@ -74,6 +74,7 @@ public class BlocoDeNotas {
         return null;
 
     }
+    
     public String retornarBloco(){
 
         for (int i = 0; i < suasAnotacoes.size(); i++){
@@ -86,6 +87,15 @@ public class BlocoDeNotas {
 
     }
 
-
+    //outra solução apresentada para "retornarBloco(), que seria o "toString()" da classe BlocoDeNotas"    
+    /*
+    public String toString() {
+        String str = "";
+        for (Anotacao an : suasAnotacoes) {
+            str += (an.toString() + "\n");
+        }
+        return str;
+    }
+    */
 
 }
