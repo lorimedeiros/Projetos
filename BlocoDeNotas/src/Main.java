@@ -71,7 +71,6 @@ public class Main {
 
         } while(!parada);
 
-
         sc.close();
 
     }
