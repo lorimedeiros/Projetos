@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-//conserta a porra dos id
-
 public class Main {
     public static void main(String[] args) {
 
