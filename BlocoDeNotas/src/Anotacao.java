@@ -5,7 +5,6 @@ public class Anotacao {
     private String texto;
     private LocalDate dataDeCriacao;
     private Integer id;
-    private Boolean removido = false;
 
 
     public Anotacao(String texto, Integer id){
@@ -40,18 +39,10 @@ public class Anotacao {
         id = novoId;
     }
 
-    public Boolean getRemovido(){
-        return removido;
-    }
-
     public String toString(){
 
         return "Anotação " + getId() + ":\n" + getTexto() + "\n" + getDataDeCriacao();
 
-    }
-
-    public void removidoTrue(){
-        this.removido = true;
     }
 
 }
