@@ -5,12 +5,6 @@ public class BlocoDeNotas {
     private ArrayList <Anotacao> suasAnotacoes = new ArrayList<>();
     private ArrayList <Anotacao> lixeira = new ArrayList<>();
 
-
-    public Anotacao buscar(Integer codigo){
-        Anotacao an = suasAnotacoes.get(codigo - 1);
-        return an;
-    }
-
     public void adicionar (String texto){
 
         Anotacao an = new Anotacao(texto, suasAnotacoes.size() + 1);
@@ -20,7 +14,7 @@ public class BlocoDeNotas {
 
     public void remover(Integer id){
 
-        Anotacao item = buscar(id);
+        Anotacao item = suasAnotacoes.get(id - 1);
         lixeira.add(item);
         suasAnotacoes.remove(item);
         item.setIdRemovido(lixeira.size() + 1);
@@ -36,7 +30,7 @@ public class BlocoDeNotas {
 
     public void editar(String texto, Integer id){
 
-        Anotacao item = buscar(id);
+        Anotacao item = suasAnotacoes.get(id - 1);
         item.setTexto(texto);
 
     }
@@ -74,7 +68,7 @@ public class BlocoDeNotas {
         return null;
 
     }
-    
+
     public String retornarBloco(){
 
         for (int i = 0; i < suasAnotacoes.size(); i++){
@@ -87,7 +81,7 @@ public class BlocoDeNotas {
 
     }
 
-    //outra solução apresentada para "retornarBloco(), que seria o "toString()" da classe BlocoDeNotas"    
+    //outra solução apresentada para "retornarBloco(), que seria o "toString()" da classe BlocoDeNotas"
     /*
     public String toString() {
         String str = "";
