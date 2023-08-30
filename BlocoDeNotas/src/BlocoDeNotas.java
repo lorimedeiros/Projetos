@@ -35,6 +35,26 @@ public class BlocoDeNotas {
 
     }
 
+    public String buscar(String trecho){
+
+        String achados = "";
+
+        for (int i = 0; i < suasAnotacoes.size(); i++) {
+
+            Anotacao an = suasAnotacoes.get(i);
+
+            if (an.toString().contains(trecho)){
+
+                achados += an.toString() + "\n\n";
+
+            }
+
+        }
+
+        return achados;
+
+    }
+
     public void recuperar(Integer id){
 
         Anotacao an = lixeira.get(id - 1);
