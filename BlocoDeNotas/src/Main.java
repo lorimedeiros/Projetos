@@ -16,15 +16,16 @@ public class Main {
                     "1. Adicionar nota\n" +
                     "2. Ver bloco de Notas\n" +
                     "3. Editar nota\n" +
-                    "4. Excluir nota\n" +
-                    "5. Ver lixeira\n" +
-                    "6. Recuperar nota\n" +
-                    "7. Sair");
+                    "4. Buscar notas por conteúdo\n" +
+                    "5. Excluir nota\n" +
+                    "6. Ver lixeira\n" +
+                    "7. Recuperar nota\n" +
+                    "8. Sair");
 
             int respMenu = Integer.parseInt(sc.nextLine());
             System.out.println();
 
-            if ((respMenu < 1) || (respMenu > 7)){
+            if ((respMenu < 1) || (respMenu > 8)){
                 System.out.println("Opção inexistente");
                 System.out.println();
             }
@@ -39,7 +40,7 @@ public class Main {
 
                 bn.retornarBloco();
 
-            } else if (respMenu == 3){
+            } else if (respMenu == 3) {
 
                 System.out.println("Insira o ID da nota que deseja editar:");
                 int id = Integer.parseInt(sc.nextLine());
@@ -49,21 +50,27 @@ public class Main {
 
             } else if (respMenu == 4){
 
+                System.out.println("Insira o trecho que deseja pesquisar:");
+                String tc = sc.nextLine();
+                System.out.println(bn.buscar(tc));
+
+            } else if (respMenu == 5){
+
                 System.out.println("Insira o ID da nota que deseja excluir:");
                 int id = Integer.parseInt(sc.nextLine());
                 bn.remover(id);
 
-            } else if (respMenu == 5){
+            } else if (respMenu == 6){
 
                 bn.retornarLixeira();
 
-            } else if (respMenu == 6){
+            } else if (respMenu == 7){
 
                 System.out.println("Insira o ID, na lixeira, da nota que deseja recuperar:");
                 int id = Integer.parseInt(sc.nextLine());
                 bn.recuperar(id);
 
-            } else if (respMenu == 7){
+            } else if (respMenu == 8){
 
                 parada = true;
 
