@@ -8,7 +8,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Random ran = new Random();
 
-        int num = ran.nextInt(100);
+        int num = ran.nextInt(101);
 
         int pontuacao = 100;
 
